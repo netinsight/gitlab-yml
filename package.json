@@ -1,7 +1,7 @@
 {
-    "name": "node-gitlab-ci",
-    "version": "0.4.0",
-    "description": "Create dynamically created GitLab CI pipelines within Node and TypeScript.",
+    "name": "gitlab-ts",
+    "version": "0.1.0",
+    "description": "Create GitLab CI pipelines with TypeScript.",
     "scripts": {
         "build": "tsc",
         "dev": "tsc -w",
@@ -12,23 +12,11 @@
         "gitlab-ci",
         "continuous-integration"
     ],
-    "bin": {
-        "node-gitlab-ci": "lib/index.js"
-    },
     "main": "lib/index.js",
     "types": "src/index.ts",
-    "homepage": "https://devowl.io/",
     "repository": {
         "type": "git",
-        "url": "git+https://gitlab.com/devowlio/node-gitlab-ci.git"
-    },
-    "bugs": {
-        "url": "https://gitlab.com/devowlio/node-gitlab-ci/issues"
-    },
-    "author": {
-        "name": "Matthias Günter",
-        "email": "matthias.guenter@devowl.io",
-        "url": "https://devowl.io/"
+        "url": "git+https://gitlab.com/karlbohlmark/node-gitlab-ci.git"
     },
     "contributors": [
         {
