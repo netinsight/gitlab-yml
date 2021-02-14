@@ -1,19 +1,10 @@
 import { GitLabCi, JobDefinition } from ".";
 import merge from "deepmerge";
 import { sync as globSync } from "glob";
-import { Gitlab } from "@gitbeaker/node";
 import { execSync } from "child_process";
 
 type JobDefinitionExtends = JobDefinition & { needsExtends?: string[] };
 type MacroArgs = {};
-
-type ConstructedType<Constructor> = Constructor extends {
-    new (...args: any[]): infer B;
-}
-    ? B
-    : never;
-
-type GitlabType = ConstructedType<typeof Gitlab>;
 
 /**
  * A global OOP-style GitLab CI configurator.
@@ -34,11 +25,6 @@ class Config {
      * See patch() method.
      */
     private patchers: Array<(plain: GitLabCi) => void> = [];
-
-    /**
-     * REST API handler.
-     */
-    private gapi?: GitlabType;
 
     /**
      * The top-level `workflow:` key applies to the entirety of a pipeline, and will determine whether
@@ -158,9 +144,9 @@ class Config {
 
         if (!this.plain.jobs[useName]) {
             this.plain.jobs[useName] = job;
-            console.log(`Job "${useName}" created successfully!`);
+            // console.log(`Job "${useName}" created successfully!`);
         } else {
-            console.info(`Job "${useName}" already exists, skipping...`);
+            // console.info(`Job "${useName}" already exists, skipping...`);
         }
     }
 
@@ -231,24 +217,6 @@ class Config {
 
         return copy;
     }
-
-    /**
-     * Get the REST API handler.
-     *
-     * @see https://www.npmjs.com/package/node-gitlab
-     */
-    public get api() {
-        if (!this.gapi) {
-            this.gapi = new Gitlab({
-                host: process.env.CI_API_V4_URL,
-                token: process.env.GITLAB_TOKEN,
-                jobToken: process.env.CI_JOB_TOKEN,
-                rejectUnauthorized: true,
-            }) as GitlabType;
-        }
-        return this.gapi;
-    }
-
     /**
      * Check if files got changed by a commit by a regexp. E. g. `^\.vscode\/launch\.json$`.
      */
@@ -291,7 +259,7 @@ class Config {
                 }
 
                 if (!jobKey) {
-                    console.warn(`The job "${from}" does not exist, skipping...`);
+                    // console.warn(`The job "${from}" does not exist, skipping...`);
                     continue;
                 }
                 const jobObj = pipeline.jobs[jobKey];

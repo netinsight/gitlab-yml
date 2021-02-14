@@ -1,5 +1,5 @@
 {
-    "name": "gitlab-ts",
+    "name": "gitlab-yml",
     "version": "0.1.0",
     "description": "Create GitLab CI pipelines with TypeScript.",
     "scripts": {
@@ -51,8 +51,6 @@
         "endOfLine": "lf"
     },
     "dependencies": {
-        "@gitbeaker/node": "^23.2.0",
-        "commander": "^5.1.0",
         "deepmerge": "^4.2.2",
         "glob": "^7.1.6",
         "ts-node": "^8.10.1",

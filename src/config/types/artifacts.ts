@@ -5,7 +5,7 @@ type ArtifactsDefinition = {
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#artifactspaths
      */
-    paths: string[];
+    paths?: string[];
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#artifactsexpose_as
      */
