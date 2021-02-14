@@ -1,6 +1,6 @@
 {
     "name": "gitlab-yml",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Create GitLab CI pipelines with TypeScript.",
     "scripts": {
         "build": "tsc",
