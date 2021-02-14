@@ -3,8 +3,12 @@ import merge from "deepmerge";
 import { sync as globSync } from "glob";
 import { execSync } from "child_process";
 
-type JobDefinitionExtends = JobDefinition & { needsExtends?: string[] };
+type JobDefinitionExtends = JobDefinition;
 type MacroArgs = {};
+
+Object.defineProperty(RegExp.prototype, "toJSON", {
+    value: RegExp.prototype.toString,
+});
 
 /**
  * A global OOP-style GitLab CI configurator.
@@ -246,10 +250,6 @@ class Config {
         job: JobDefinitionExtends = firstJob
     ) {
         if (job.extends) {
-            if (!job.needsExtends) {
-                job.needsExtends = [];
-            }
-
             for (const from of job.extends) {
                 let jobKey: string;
                 if (pipeline.jobs?.[from]) {
@@ -263,7 +263,6 @@ class Config {
                     continue;
                 }
                 const jobObj = pipeline.jobs[jobKey];
-                firstJob.needsExtends.unshift(from);
 
                 this.recursivelyExtend(pipeline, firstJob, jobObj);
             }
@@ -281,15 +280,7 @@ class Config {
             const job = pipeline.jobs[key];
             if (job.extends && !key.startsWith(".")) {
                 this.recursivelyExtend(pipeline, job);
-
-                let result: JobDefinitionExtends = {};
-                const { needsExtends } = job as JobDefinitionExtends;
-                for (const extendKey of needsExtends) {
-                    result = merge(result, pipeline.jobs[extendKey]);
-                }
-
-                // The main job definition has highest priority
-                pipeline.jobs[key] = merge(result, job);
+                pipeline.jobs[key] = job;
             }
         }
     }
@@ -308,7 +299,6 @@ class Config {
                 job.extends = job.extends.filter((job) => jobIds.indexOf(job) === -1);
                 if (!job.extends.length) {
                     delete job.extends;
-                    delete job.needsExtends;
                 }
             }
         }
