@@ -1,9 +1,7 @@
-import { GitLabCi, JobDefinition } from ".";
+import { GitLabCi } from ".";
 import merge from "deepmerge";
-import { sync as globSync } from "glob";
 import { execSync } from "child_process";
 
-type JobDefinitionExtends = JobDefinition;
 type MacroArgs = {};
 
 Object.defineProperty(RegExp.prototype, "toJSON", {
@@ -19,28 +17,6 @@ class Config {
      * of classes so all is done within this class.
      */
     private plain: GitLabCi = {};
-
-    /**
-     * See macro() method.
-     */
-    private macros: { [key: string]: (config: Config, args: any) => void } = {};
-
-    /**
-     * See patch() method.
-     */
-    private patchers: Array<(plain: GitLabCi) => void> = [];
-
-    /**
-     * The top-level `workflow:` key applies to the entirety of a pipeline, and will determine whether
-     * or not a pipeline is created. It currently accepts a single `rules:` key that operates similarly
-     * to `rules:` defined within jobs, enabling dynamic configuration of the pipeline.
-     */
-    public workflow(workflow: GitLabCi["workflow"]) {
-        if (!this.plain.workflow) {
-            this.plain.workflow = { rules: [] };
-        }
-        this.plain.workflow = merge(this.plain.workflow, workflow);
-    }
 
     /**
      * `stages` is used to define stages that can be used by jobs and is defined globally.
@@ -94,44 +70,6 @@ class Config {
     }
 
     /**
-     * Register a macro. A macro can be used to define jobs from a given variable map.
-     *
-     * @param key
-     * @param callback
-     */
-    public macro<T extends MacroArgs>(key: string, callback: (config: Config, args: T) => void) {
-        if (this.macros[key]) {
-            throw new Error(`Macro ${key} already defined! You are not allowed to overwrite it.`);
-        }
-
-        this.macros[key] = callback;
-    }
-
-    /**
-     * Apply a macro.
-     *
-     * @param key
-     * @param args
-     */
-    public from<T extends MacroArgs>(key: string, args: T) {
-        if (!this.macros[key]) {
-            throw new Error(
-                `Macro ${key} not found, please register it with Config#macro! Consider also, that you need to register the macro before you execute from it.`
-            );
-        }
-
-        this.macros[key](this, args);
-    }
-
-    /**
-     * Allows to run a callback on the resulting GitLab CI Yaml object (after recursively applying
-     * extends and macros).
-     */
-    public patch(callback: Config["patchers"][0]) {
-        this.patchers.push(callback);
-    }
-
-    /**
      * A job is defined as a list of parameters that define the job’s behavior.
      *
      * @see https://docs.gitlab.com/ee/ci/yaml/#configuration-parameters
@@ -155,62 +93,10 @@ class Config {
     }
 
     /**
-     * Similar to [`extends`](https://docs.gitlab.com/ee/ci/yaml/#extends) but it uses
-     * a deep-merge mechanism instead of the built-in extend functionality of GitLab CI.
-     * This ensures more granular configuration!
-     *
-     * @param fromName The job name you want to extend from
-     * @param name The new job name
-     * @param job Job definition
-     * @param hidden See https://docs.gitlab.com/ee/ci/yaml/#hide-jobs for more infos
-     */
-    public extends(fromName: string | string[], name: string, job: GitLabCi["jobs"][0], hidden = false) {
-        this.job(name, merge(job, { extends: Array.isArray(fromName) ? fromName : [fromName] }), hidden);
-    }
-
-    /**
-     * Include further `.ts` configurations by a glob. This is similar to [`include:local`](https://docs.gitlab.com/ee/ci/yaml/#includelocal)
-     * but this implementation should be used instead!
-     *
-     * @param cwd Current working directy, use `process.cwd()`
-     * @param globs See https://www.npmjs.com/package/glob for more information
-     */
-    public async include(cwd: string, globs: string[]) {
-        for (const glob of globs) {
-            const files = globSync(glob, {
-                absolute: true,
-                cwd,
-                dot: true,
-            });
-
-            for (const file of files) {
-                console.log(`Include file "${file}..."`);
-                const exported = await import(file);
-                if (!exported?.extendConfig) {
-                    throw new Error(`Please export a function extendConfig which returns a Config instance!`);
-                }
-
-                if (!(exported.extendConfig instanceof Function)) {
-                    throw new Error(`The exported extendConfig is not a function!`);
-                }
-
-                await exported.extendConfig(this);
-            }
-        }
-    }
-
-    /**
      * Get the whole configuration as yaml-serializable object.
      */
     public getPlainObject() {
         let copy = JSON.parse(JSON.stringify(this.plain)) as GitLabCi;
-
-        this.resolveExtends(copy);
-        this.clear(copy);
-
-        for (const patcher of this.patchers) {
-            patcher(copy);
-        }
 
         // Move jobs to root
         copy = {
@@ -242,66 +128,6 @@ class Config {
         }
 
         return regexp.test(list);
-    }
-
-    private recursivelyExtend(
-        pipeline: GitLabCi,
-        firstJob: JobDefinitionExtends,
-        job: JobDefinitionExtends = firstJob
-    ) {
-        if (job.extends) {
-            for (const from of job.extends) {
-                let jobKey: string;
-                if (pipeline.jobs?.[from]) {
-                    jobKey = from;
-                } else if (pipeline.jobs?.[`.${from}`]) {
-                    jobKey = `.${from}`;
-                }
-
-                if (!jobKey) {
-                    // console.warn(`The job "${from}" does not exist, skipping...`);
-                    continue;
-                }
-                const jobObj = pipeline.jobs[jobKey];
-
-                this.recursivelyExtend(pipeline, firstJob, jobObj);
-            }
-        }
-    }
-
-    /**
-     * Resolves all `extends` and puts it in correct order.
-     *
-     * @param pipeline
-     */
-    private resolveExtends(pipeline: GitLabCi) {
-        const jobIds = Object.keys(pipeline.jobs);
-        for (const key of jobIds) {
-            const job = pipeline.jobs[key];
-            if (job.extends && !key.startsWith(".")) {
-                this.recursivelyExtend(pipeline, job);
-                pipeline.jobs[key] = job;
-            }
-        }
-    }
-
-    /**
-     * Clear temporary hold variables.
-     *
-     * @param pipeline
-     */
-    private clear(pipeline: GitLabCi) {
-        // Finally, remove all existing `extends`
-        const jobIds = Object.keys(pipeline.jobs);
-        for (const key of jobIds) {
-            const job = pipeline.jobs[key] as JobDefinitionExtends;
-            if (job.extends) {
-                job.extends = job.extends.filter((job) => jobIds.indexOf(job) === -1);
-                if (!job.extends.length) {
-                    delete job.extends;
-                }
-            }
-        }
     }
 }
 
