@@ -9,6 +9,7 @@ import {
     TriggerDefinition,
     RulesDefinition,
     GitLabCi,
+    ParallelClass
 } from ".";
 
 type JobDefinition = GitLabCi["default"] & {
@@ -54,7 +55,7 @@ type JobDefinition = GitLabCi["default"] & {
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#parallel
      */
-    parallel?: number;
+    parallel?: ParallelClass | number;
     trigger?: TriggerDefinition;
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#resource_group
