@@ -14,3 +14,4 @@ export * from "./environment";
 export * from "./include";
 export * from "./trigger";
 export * from "./rules";
+export * from "./parallel";
