@@ -17,6 +17,7 @@ type MultiProjectPipeline =
 /**
  * @see https://docs.gitlab.com/ee/ci/yaml/#trigger-syntax-for-child-pipeline
  */
+/*
 type ChildPipeline = {
     include:
         | string
@@ -31,6 +32,7 @@ type ChildPipeline = {
           }>;
     strategy?: string;
 };
+*/
 
 /**
  * @see https://docs.gitlab.com/ee/ci/yaml/#trigger
