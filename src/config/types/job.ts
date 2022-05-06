@@ -9,7 +9,7 @@ import {
     TriggerDefinition,
     RulesDefinition,
     GitLabCi,
-    ParallelClass
+    ParallelClass,
 } from ".";
 
 type JobDefinition = GitLabCi["default"] & {

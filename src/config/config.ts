@@ -2,7 +2,7 @@ import { GitLabCi } from ".";
 import merge from "deepmerge";
 import { execSync } from "child_process";
 
-type MacroArgs = {};
+type MacroArgs = any;
 
 Object.defineProperty(RegExp.prototype, "toJSON", {
     value: RegExp.prototype.toString,
