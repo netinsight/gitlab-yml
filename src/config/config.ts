@@ -31,6 +31,18 @@ class Config {
     }
 
     /**
+     * The top-level `workflow:` key applies to the entirety of a pipeline, and will determine whether
+     * or not a pipeline is created. It currently accepts a single `rules:` key that operates similarly
+     * to `rules:` defined within jobs, enabling dynamic configuration of the pipeline.
+     */
+    public workflow(workflow: GitLabCi["workflow"]) {
+        if (!this.plain.workflow) {
+            this.plain.workflow = { rules: [] };
+        }
+        this.plain.workflow = merge(this.plain.workflow, workflow);
+    }
+
+    /**
      * Some parameters can be set globally as the default for all jobs using the `default:` keyword.
      * Default parameters can then be overridden by job-specific configuration.
      *
