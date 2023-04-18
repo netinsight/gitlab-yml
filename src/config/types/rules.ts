@@ -3,7 +3,7 @@ import { WhenOptions } from ".";
 /**
  * @see https://docs.gitlab.com/ee/ci/yaml/#rules-clauses
  */
-type RulesDefinition = Array<{
+type RulesDefinition<T = WhenOptions> = Array<{
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#rulesif
      */
@@ -19,7 +19,7 @@ type RulesDefinition = Array<{
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#permitted-attributes
      */
-    when?: WhenOptions;
+    when?: T;
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#permitted-attributes
      */

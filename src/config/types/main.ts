@@ -27,7 +27,7 @@ interface GitLabCi {
      * @see https://docs.gitlab.com/ee/ci/yaml/#workflowrules
      */
     workflow?: {
-        rules: RulesDefinition;
+        rules: RulesDefinition<"always" | "never">;
     };
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#global-defaults
