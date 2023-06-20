@@ -29,10 +29,7 @@
         /* Module Resolution Options */
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-
-        /* Experimental Options */
-        "experimentalDecorators": true
+        "esModuleInterop": true
     },
     "include": ["src/**/*"]
 }
