@@ -5,7 +5,8 @@
     "scripts": {
         "build": "tsc",
         "dev": "tsc -w",
-        "lint": "eslint \"src/**/*.ts\""
+        "lint": "eslint \"src/**/*.ts\"",
+        "prepare": "npm run build"
     },
     "keywords": [
         "gitlab",
@@ -13,9 +14,8 @@
         "continuous-integration"
     ],
     "main": "lib/index.js",
-    "types": "src/index.ts",
+    "types": "lib/index.d.ts",
     "files": [
-        "src",
         "lib"
     ],
     "repository": {
