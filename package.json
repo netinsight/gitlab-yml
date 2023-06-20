@@ -56,16 +56,15 @@
     "devDependencies": {
         "@commitlint/cli": "^8.2.0",
         "@commitlint/config-conventional": "^8.2.0",
-        "@types/node": "^16.11.33",
-        "@typescript-eslint/eslint-plugin": "^5.22.0",
-        "@typescript-eslint/parser": "^5.22.0",
+        "@types/node": "^16.18.36",
+        "@typescript-eslint/eslint-plugin": "^5.60.0",
+        "@typescript-eslint/parser": "^5.60.0",
         "eslint": "^8.14.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-prettier": "^4.0.0",
         "husky": "^4.2.1",
         "prettier": "^2.6.2",
         "pretty-quick": "^2.0.1",
-        "ts-node": "^8.10.1",
-        "typescript": "^4.6.4"
+        "typescript": "^4.9.5"
     }
 }
