@@ -7,10 +7,10 @@ type OnlyExpression =
       }
     | RefList;
 
-type ExpectExpression = OnlyExpression;
+type ExceptExpression = OnlyExpression;
 
 type RefList = Ref[];
 
 type Ref = string | RegExp;
 
-export { OnlyExpression, ExpectExpression };
+export { OnlyExpression, ExceptExpression };

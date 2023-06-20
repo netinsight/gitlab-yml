@@ -1,7 +1,7 @@
 import {
     VariablesDefinition,
     OnlyExpression,
-    ExpectExpression,
+    ExceptExpression,
     ScriptDefinition,
     NeedsDefinition,
     WhenDefinition,
@@ -36,7 +36,7 @@ type JobDefinition = GitLabCi["default"] & {
     only?: OnlyExpression;
 
     /** @deprecated not being actively developed. rules is the preferred keyword to control when to add jobs to pipelines. https://docs.gitlab.com/ee/ci/yaml/#only--except */
-    except?: ExpectExpression;
+    except?: ExceptExpression;
 
     needs?: NeedsDefinition;
     /**
