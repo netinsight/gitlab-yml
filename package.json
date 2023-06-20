@@ -14,6 +14,10 @@
     ],
     "main": "lib/index.js",
     "types": "src/index.ts",
+    "files": [
+        "src",
+        "lib"
+    ],
     "repository": {
         "type": "git",
         "url": "git+https://gitlab.com/karlbohlmark/node-gitlab-ci.git"
