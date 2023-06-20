@@ -13,7 +13,7 @@
         "continuous-integration"
     ],
     "main": "lib/index.js",
-    "types": "src/index.ts",
+    "types": "lib/index.d.ts",
     "files": [
         "lib"
     ],
