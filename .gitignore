@@ -1,5 +1,6 @@
 package-lock.json
 .gitlab-ci.ts.yml
+lib/
 
 # Logs
 logs
