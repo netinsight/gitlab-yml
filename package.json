@@ -15,7 +15,6 @@
     "main": "lib/index.js",
     "types": "src/index.ts",
     "files": [
-        "src",
         "lib"
     ],
     "repository": {
