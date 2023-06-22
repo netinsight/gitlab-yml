@@ -3,6 +3,7 @@
     "version": "0.1.3",
     "description": "Create GitLab CI pipelines with TypeScript.",
     "scripts": {
+        "postinstall": "husky install",
         "build": "tsc",
         "dev": "tsc -w",
         "lint": "eslint \"src/**/*.ts\"",
@@ -29,12 +30,6 @@
         }
     ],
     "license": "MIT",
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged",
-            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-        }
-    },
     "commitlint": {
         "extends": [
             "@commitlint/config-conventional"
@@ -66,7 +61,7 @@
         "eslint": "^8.43.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",
-        "husky": "^4.3.8",
+        "husky": "^8.0.3",
         "prettier": "^2.8.8",
         "pretty-quick": "^2.0.2",
         "typescript": "^5.1.3"
