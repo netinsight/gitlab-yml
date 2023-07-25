@@ -29,6 +29,12 @@ type CacheDefinition = {
                */
               prefix?: string;
           };
+    /** @see https://docs.gitlab.com/ee/ci/yaml#cacheunprotect */
+    unprotect?: boolean;
+    /** @see https://docs.gitlab.com/ee/ci/yaml/#cachewhen */
+    when?: "on_success" | "on_failure" | "always";
+    /** @see https://docs.gitlab.com/ee/ci/yaml/#cachefallback_keys */
+    fallback_keys?: string[];
 };
 
 export { CacheDefinition };
