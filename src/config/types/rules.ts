@@ -1,7 +1,7 @@
 import { WhenOptions } from ".";
 
 /**
- * @see https://docs.gitlab.com/ee/ci/yaml/#rules-clauses
+ * @see https://docs.gitlab.com/ee/ci/yaml/#rules
  */
 type RulesDefinition<T = WhenOptions> = Array<{
     /**
