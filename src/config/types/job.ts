@@ -47,6 +47,7 @@ type JobDefinition = GitLabCi["default"] & {
      * @see https://docs.gitlab.com/ee/ci/yaml/#allow_failure
      */
     allow_failure?: boolean;
+    /** @see https://docs.gitlab.com/ee/ci/yaml/#when */
     when?: WhenDefinition;
     /**
      * @see https://docs.gitlab.com/ee/ci/yaml/#whendelayed
