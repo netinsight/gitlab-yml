@@ -83,6 +83,10 @@ type ArtifactsDefinition = {
          * @see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsbrowser_performance
          */
         metrics?: string;
+        /**
+         * @see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsload_performance
+         */
+        load_performance?: string;
     };
 };
 
