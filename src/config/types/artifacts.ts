@@ -76,11 +76,11 @@ type ArtifactsDefinition = {
          */
         license_scanning?: string;
         /**
-         * @see https://docs.gitlab.com/ee/ci/pipelines/job_artifacts.html#artifactsreportsperformance-premium
+         * @see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsbrowser_performance
          */
-        performance?: string;
+        browser_performance?: string;
         /**
-         * @see https://docs.gitlab.com/ee/ci/pipelines/job_artifacts.html#artifactsreportsmetrics-premium
+         * @see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsbrowser_performance
          */
         metrics?: string;
     };
