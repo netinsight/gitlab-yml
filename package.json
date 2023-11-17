@@ -1,6 +1,6 @@
 {
     "name": "gitlab-yml",
-    "version": "0.4.3",
+    "version": "0.4.4",
     "description": "Create GitLab CI pipelines with TypeScript.",
     "scripts": {
         "postinstall": "npm run build",
