@@ -80,7 +80,7 @@ type ArtifactsDefinition = {
          */
         browser_performance?: string;
         /**
-         * @see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsbrowser_performance
+         * @see https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportsmetrics
          */
         metrics?: string;
         /**
