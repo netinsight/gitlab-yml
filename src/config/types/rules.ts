@@ -1,4 +1,6 @@
-import { WhenOptions } from ".";
+import type { NeedsDefinition } from "./needs";
+import type { VariablesDefinition } from "./variables";
+import type { WhenOptions } from "./when";
 
 /**
  * @see https://docs.gitlab.com/ee/ci/yaml/#rules
@@ -24,6 +26,18 @@ type RulesDefinition<T = WhenOptions> = Array<{
      * @see https://docs.gitlab.com/ci/yaml/#rulesallow_failure
      */
     allow_failure?: boolean;
+    /**
+     * @see https://docs.gitlab.com/ci/yaml/#rulesneeds
+     */
+    needs?: NeedsDefinition;
+    /**
+     * @see https://docs.gitlab.com/ci/yaml/#rulesvariables
+     */
+    variables?: VariablesDefinition;
+    /**
+     * @see https://docs.gitlab.com/ci/yaml/#rulesinterruptible
+     */
+    interruptible?: boolean;
 }>;
 
 export { RulesDefinition };
