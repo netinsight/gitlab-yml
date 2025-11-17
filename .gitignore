@@ -65,3 +65,5 @@ typings/
 .next
 
 .idea
+
+.cache
