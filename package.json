@@ -1,69 +1,48 @@
 {
-    "name": "gitlab-yml",
-    "version": "0.4.6",
-    "description": "Create GitLab CI pipelines with TypeScript.",
-    "scripts": {
-        "postinstall": "npm run build",
-        "build": "tsc",
-        "dev": "tsc -w",
-        "lint": "eslint \"src/**/*.ts\"",
-        "prepare": "husky install"
-    },
-    "keywords": [
-        "gitlab",
-        "gitlab-ci",
-        "continuous-integration"
-    ],
-    "main": "lib/index.js",
-    "types": "lib/index.d.ts",
-    "files": [
-        "lib"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "git+https://gitlab.com/karlbohlmark/node-gitlab-ci.git"
-    },
-    "contributors": [
-        {
-            "name": "devowl.io GmbH",
-            "email": "mail@devowl.io"
-        }
-    ],
-    "license": "MIT",
-    "commitlint": {
-        "extends": [
-            "@commitlint/config-conventional"
-        ],
-        "rules": {
-            "header-max-length": [
-                2,
-                "always",
-                140
-            ]
-        }
-    },
-    "prettier": {
-        "arrowParens": "always",
-        "printWidth": 120,
-        "useTabs": false,
-        "tabWidth": 4,
-        "endOfLine": "lf"
-    },
-    "dependencies": {
-        "deepmerge": "^4.3.1"
-    },
-    "devDependencies": {
-        "@commitlint/cli": "^17.6.5",
-        "@commitlint/config-conventional": "^17.6.5",
-        "@types/node": "^20.17.4",
-        "@typescript-eslint/eslint-plugin": "^5.60.0",
-        "@typescript-eslint/parser": "^5.60.0",
-        "eslint": "^8.43.0",
-        "eslint-config-prettier": "^8.8.0",
-        "eslint-plugin-prettier": "^4.2.1",
-        "husky": "^8.0.3",
-        "prettier": "^2.8.8",
-        "pretty-quick": "^3.1.3",
-        "typescript": "^5.6.3"
-    }
+  "name": "gitlab-ci-builder",
+  "version": "0.0.0",
+  "description": "Create GitLab CI pipelines with TypeScript.",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "format": "prettier --check . --ignore-path ./.gitignore --ignore-path ./.prettierignore",
+    "lint": "eslint .",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "gitlab",
+    "gitlab-ci",
+    "continuous-integration",
+    "pipeline",
+    "jobs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/noxiy/gitlab-ci-builder.git"
+  },
+  "license": "MIT",
+  "prettier": "./prettier.config.mjs",
+  "dependencies": {
+    "deepmerge": "4.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "@eslint/compat": "2.0.0",
+    "eslint-config-turbo": "2.6.1",
+    "eslint-plugin-import": "2.32.0",
+    "eslint-plugin-package-json": "0.79.0",
+    "jsonc-eslint-parser": "2.4.1",
+    "typescript-eslint": "8.47.0",
+    "@eslint/js": "9.39.1",
+    "eslint": "9.39.1",
+    "tsdown": "0.16.5",
+    "@ianvs/prettier-plugin-sort-imports": "4.7.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.3",
+    "vitest": "4.0.10"
+  },
+  "packageManager": "pnpm@10.22.0",
+  "engines": {
+    "node": ">=22"
+  }
 }

@@ -1,32 +1,31 @@
 {
-    /* Documentation: https://www.typescriptlang.org/docs/handbook/compiler-options.html */
+    "$schema": "https://json.schemastore.org/tsconfig",
     "compilerOptions": {
-        /* Basic options */
-        "target": "ES2021",
-        "module": "commonjs",
-        "allowJs": false,
-        "jsx": "preserve",
-        "skipLibCheck": false,
-        "isolatedModules": false,
-        "outDir": "lib",
-        "declaration": true,
-        /* Strict Type-Checking Options */
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "target": "ES2022",
+        "lib": [
+            "ES2022"
+        ],
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "moduleDetection": "force",
+        "isolatedModules": true,
+        "incremental": true,
+        "disableSourceOfProjectReferenceRedirect": true,
         "strict": true,
-        "noImplicitAny": true,
-        "strictNullChecks": false,
-        "strictFunctionTypes": true,
-        "strictPropertyInitialization": false,
-        "noImplicitThis": true,
-        "alwaysStrict": true,
-        /* Additional Checks */
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "noImplicitReturns": true,
-        "noFallthroughCasesInSwitch": false,
-        /* Module Resolution Options */
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true
+        "noUncheckedIndexedAccess": true,
+        "checkJs": true,
+        "module": "Preserve",
+        "moduleResolution": "Bundler",
+        "noEmit": true,
+        "tsBuildInfoFile": "${configDir}/.cache/tsbuildinfo.json"
     },
-    "include": ["src/**/*"]
+    "exclude": [
+        "node_modules",
+        "build",
+        "dist",
+        ".next",
+        ".expo"
+    ]
 }
