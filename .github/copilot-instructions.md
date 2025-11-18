@@ -1,12 +1,14 @@
 # GitHub Copilot Instructions
 
 ## Development Philosophy
+
 - **Quality over quantity**: Write clean, maintainable, and well-structured code
 - **Senior-level TypeScript**: Leverage advanced TypeScript features for type safety
 - **Minimal and focused**: Every line of code should serve a clear purpose
 - **Performance-conscious**: Consider efficiency and avoid unnecessary complexity
 
 ## TypeScript & ESLint Rules
+
 - **No console.log**: Use proper logging or remove debug statements
 - **Consistent type imports**: Use `import type` for type-only imports
 - **No unused vars**: Prefix with `_` if intentionally unused
@@ -21,6 +23,7 @@
 - **Prefer directory imports**: Use `../src` instead of `../src/index` for cleaner imports
 
 ## Prettier Configuration
+
 - **Print width**: 100 characters max
 - **No semicolons**: Use semicolon-free style
 - **Import order**: Follow the specified import grouping:
@@ -31,6 +34,7 @@
   5. Relative imports (~/,../, ./)
 
 ## Code Generation Guidelines
+
 - Remove all `console.log` statements from generated code
 - Use proper TypeScript types instead of `any` when possible
 - **Use type-fest when available** - Prefer battle-tested utility types from type-fest over custom implementations
@@ -46,6 +50,7 @@
 - Optimize for readability and maintainability
 
 ## File Structure
+
 - Keep imports organized according to prettier rules
 - Use meaningful variable and function names
 - Add proper JSDoc comments for public APIs
