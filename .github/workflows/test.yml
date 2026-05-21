@@ -27,3 +27,4 @@ jobs:
             - run: npm install --prefer-offline
             - run: npm run build -- --noEmit
             - run: npm run lint
+            - run: npm run format:check
