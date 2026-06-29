@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES2022",
+        "target": "esnext",
         "module": "nodenext",
         "rootDir": "src",
         "outDir": "lib",
@@ -12,7 +12,8 @@
         "strictPropertyInitialization": false,
         "noImplicitReturns": true,
         "skipLibCheck": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "types": ["node"]
     },
     "include": ["src/**/*"]
 }
